@@ -1,50 +1,22 @@
 {
     "name": "keboola/hierarchy-bundle",
-    "type": "symfony-bundle",
-    "description": "Keboola Hierarchy Bundle",
+    "description": "Keboola Hierarchy Docker Application",
     "keywords": ["keboola", "hierarchy"],
     "authors": [
         {
-            "name": "Ondrej Hlavacek",
-            "email": "ondrej.hlavacek@keboola.com"
+            "name": "Ondrej Popelka",
+            "email": "ondrej.popelka@keboola.com"
         }
     ],  
-    "repositories": [
-		{
-			"type": "vcs",
-			"url": "git@github.com:keboola/provisioning-client.git"
-		}
-    ],
     "require": {
-        "php": ">=5.4.0",
-        "keboola/syrup": "1.2.5",
-        "keboola/provisioning-client": "0.4.4"
+        "php": ">=5.6.0",
+        "symfony/console": "~2.7"
     },
     "require-dev": {
 		"phpunit/phpunit": "~3.7"
     },
-	"scripts": {
-		"post-install-cmd": [
-			"Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap"
-		],
-		"post-update-cmd": [
-			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache"
-		]
- 	},
-    "minimum-stability": "alpha",
+    "minimum-stability": "stable",
     "autoload": {
-        "psr-0": { "Keboola\\HierarchyBundle": "" }
-    },
-    "target-dir": "Keboola/HierarchyBundle",
-    "extra": {
-        "symfony-app-dir": "vendor/keboola/syrup/app",
-        "symfony-web-dir": "vendor/keboola/syrup/web",
-        "incenteev-parameters": {
-            "keep-outdated": true,
-			"file": "vendor/keboola/syrup/app/config/parameters.yml",
-			"dist-file": "parameters.yml"
-        }
+        "psr-4": { "": "src/" }
     }
 }
