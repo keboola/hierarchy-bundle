@@ -1,0 +1,9 @@
+*.log
+.idea
+composer.phar
+tmp
+parameters.yml
+
+# osx noise
+.DS_Store
+profile

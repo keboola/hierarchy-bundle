@@ -1,0 +1,7 @@
+parameters:
+#    keboola_hierarchy.example.class: Keboola\HierarchyBundle\Example
+
+services:
+#    keboola_hierarchy.example:
+#        class: %keboola_hierarchy.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
