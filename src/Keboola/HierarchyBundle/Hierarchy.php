@@ -302,7 +302,7 @@ class Hierarchy
             . ' -h ' . $this->db->getHost()
             . ' '. $this->db->getDatabase()
             . ' --default-character-set=UTF8 --batch --execute ' . escapeshellarg('SELECT * FROM `out.source`;')
-            . ' --quick > ' . $outFile;
+            . ' --quick | sed \'s/\t/,/g\' > ' . $outFile;
         $process = new Process($command);
         $process->run();
         if ($process->getExitCode() != 0) {
