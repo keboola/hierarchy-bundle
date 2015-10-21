@@ -338,7 +338,7 @@ class Hierarchy
 
         // Primary key indexes
         $definition .= ",\nPRIMARY KEY (`$pkColumn`)";
-        $definition .= ") ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+        $definition .= ") ENGINE=Memory DEFAULT CHARSET=utf8;";
         return $definition;
     }
 }
