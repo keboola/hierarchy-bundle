@@ -1,3 +1,0 @@
-keboola_hierarchy_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: KeboolaHierarchyBundle:Default:index }
