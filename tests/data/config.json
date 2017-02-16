@@ -1,0 +1,27 @@
+{
+	"storage": {
+		"input": {
+			"tables": [
+				{
+					"source": "in.c-main.some-table",
+					"destination": "table.csv"
+				}
+			]
+		},
+		"output": {
+			"tables": [
+				{
+					"source": "destination.csv",
+					"destination": "out.c-main.some-table"
+				}
+			]
+		}
+	},
+	"parameters": {
+		"columns": {
+			"id": "id",
+			"sort": "date",
+			"parent": "idSourceTweet"
+		}
+	}
+}

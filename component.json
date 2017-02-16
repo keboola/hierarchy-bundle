@@ -1,0 +1,23 @@
+{
+  "definition": {
+    "type": "builder",
+    "uri": "keboola/docker-mysql-php-cli",
+    "build_options": {
+      "repository": {
+        "uri": "https://github.com/keboola/php-custom-application-hierarchy.git",
+        "type": "git"
+      },
+      "commands": [
+        "git clone {{repository}} /home/",
+        "cd /home/",
+        "git checkout tags/0.0.1",
+        "/usr/local/bin/composer install",
+        "chmod uga+rwx /entrypoint.sh"
+      ],
+      "entry_point": "/entrypoint.sh mysqld && service mysql start && php /home/console.php hierarchy:run --data=/data/"
+    }
+  },
+  "process_timeout": 21600,
+  "configuration_format": "json",
+  "memory": "8192m"
+}

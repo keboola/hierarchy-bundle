@@ -1,8 +1,7 @@
-Not Working!
-==================
-
 Hierarchy Reconstruction 
 ==================
+
+This application is experimental!
 
 Hierarchy Reconstruction application builds a tree from an ancestor relationship (parent id), sorts the tree and returns the tree position (position from top, depth from left) of every node of the tree. The output of this transformation are 4 new columns
 
@@ -112,3 +111,9 @@ A       [0,0,0] [0,0]   (2012-01-01 12:00:00)
 I       [8,0,0] [0,0]   (2012-01-02 13:00:00) 
 |-J     [9,1,1] [1,1]   (2012-01-02 14:00:00) 
 ```
+
+Running in Docker
+=================
+
+`docker build --tag tree .`
+`docker run -i -t --volume=./tests/data/:/data/ tree`

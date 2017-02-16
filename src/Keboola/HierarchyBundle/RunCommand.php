@@ -5,6 +5,7 @@ namespace Keboola\HierarchyBundle;
 use Doctrine\DBAL\Configuration;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Driver\PDOMySql\Driver;
+use Doctrine\DBAL\Exception\ConnectionException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -66,20 +67,30 @@ class RunCommand extends Command
         $output->writeln("Parameters validated");
 
         $driver = new Driver();
-        $db =  new Connection([
-            'driver'    => 'pdo_mysql',
-            'host'      => 'localhost',
-            'user'      => 'root',
-            'password'  => 'root',
-            'charset' => 'utf8',
-            'driverOptions' => [\PDO::MYSQL_ATTR_LOCAL_INFILE => true]
-
-        ], $driver);
-
-        $db->query('DROP DATABASE IF EXISTS `hierarchy`');
-        $db->query('CREATE SCHEMA `hierarchy`;');
-        $db->query('USE `hierarchy`;');
-        $output->writeln("Database connection successful");
+        $retries = 0;
+        do {
+            try {
+                $db = new Connection([
+                    'driver' => 'pdo_mysql',
+                    'host' => 'localhost',
+                    'user' => 'root',
+                    'password' => 'root',
+                    'charset' => 'utf8',
+                ], $driver);
+                $db->query('DROP DATABASE IF EXISTS `hierarchy`');
+                $db->query('CREATE SCHEMA `hierarchy`;');
+                $db->query('USE `hierarchy`;');
+                $output->writeln("Database connection successful");
+                break;
+            } catch (\Exception $e) {
+                $retries++;
+                if ($retries > 10) {
+                    throw $e;
+                }
+                $output->writeln("Waiting for connection: $retries");
+                sleep(10);
+            }
+        } while (true);
 
         $hierarchy = new Hierarchy($db);
         $inputFile = $dataDir . DIRECTORY_SEPARATOR . 'in' . DIRECTORY_SEPARATOR .

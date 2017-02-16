@@ -57,7 +57,7 @@ class Hierarchy
         $this->db->query($tableDefinition);
 
         $loadQuery = '
-            LOAD DATA LOCAL INFILE \'' . str_replace('\\', '/', $inputFile) .'\'
+            LOAD DATA INFILE \'' . str_replace('\\', '/', $inputFile) .'\'
             INTO TABLE `source`
             FIELDS TERMINATED BY \',\'
             OPTIONALLY ENCLOSED BY \'"\'
